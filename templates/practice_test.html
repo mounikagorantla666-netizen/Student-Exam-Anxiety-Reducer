@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Practice Test</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <h2>🧠 Exam Anxiety Reducer</h2>
+
+    <a href="/dashboard">Dashboard</a>
+
+</nav>
+
+
+<div class="form-container">
+
+    <div class="form-box">
+
+        <h1>📝 Practice Test</h1>
+
+        <p>Select your test preferences.</p>
+
+        <form method="POST">
+
+            <label>Subject</label>
+
+            <select name="subject" required>
+
+                <option value="">Select Subject</option>
+
+                <option value="Python">Python</option>
+
+            </select>
+
+
+            <label>Topic</label>
+
+            <select name="topic" required>
+
+                <option value="">Select Topic</option>
+
+                <option value="Loops">Loops</option>
+
+                <option value="Functions">Functions</option>
+
+            </select>
+
+
+            <button type="submit">
+                Start Test →
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

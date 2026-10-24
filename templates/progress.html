@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Progress Report</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <h2>🧠 Exam Anxiety Reducer</h2>
+
+    <div>
+
+        <a href="/dashboard">Dashboard</a>
+
+        <a href="/logout">Logout</a>
+
+    </div>
+
+</nav>
+
+
+<div class="progress-container">
+
+    <h1>📈 My Progress Report</h1>
+
+    <p>
+        Track your performance and improvement over time.
+    </p>
+
+
+    <!-- SUMMARY CARDS -->
+
+    <div class="progress-grid">
+
+        <div class="progress-card">
+
+            <div class="progress-icon">📝</div>
+
+            <h3>Total Tests</h3>
+
+            <h2>{{ total_tests }}</h2>
+
+        </div>
+
+
+        <div class="progress-card">
+
+            <div class="progress-icon">🎯</div>
+
+            <h3>Overall Score</h3>
+
+            <h2>{{ overall_percentage }}%</h2>
+
+        </div>
+
+
+        <div class="progress-card">
+
+            <div class="progress-icon">❌</div>
+
+            <h3>Total Mistakes</h3>
+
+            <h2>{{ total_mistakes }}</h2>
+
+        </div>
+
+
+        <div class="progress-card">
+
+            <div class="progress-icon">⏱️</div>
+
+            <h3>Average Time</h3>
+
+            <h2>{{ average_time }} sec</h2>
+
+        </div>
+
+    </div>
+
+
+    <!-- TEST HISTORY -->
+
+    <div class="progress-section">
+
+        <h2>📋 Test History</h2>
+
+        {% if tests %}
+
+        <table>
+
+            <tr>
+
+                <th>Test</th>
+                <th>Subject</th>
+                <th>Topic</th>
+                <th>Score</th>
+                <th>Percentage</th>
+                <th>Date</th>
+
+            </tr>
+
+
+            {% for test in tests %}
+
+            <tr>
+
+                <td>
+                    {{ loop.index }}
+                </td>
+
+                <td>
+                    {{ test[1] }}
+                </td>
+
+                <td>
+                    {{ test[2] }}
+                </td>
+
+                <td>
+                    {{ test[3] }} / {{ test[4] }}
+                </td>
+
+                <td>
+
+                    {{ ((test[3] / test[4]) * 100)|round(1) }}%
+
+                </td>
+
+                <td>
+                    {{ test[5] }}
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        {% else %}
+
+        <p class="empty-message">
+            No tests completed yet.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- TOPIC PERFORMANCE -->
+
+    <div class="progress-section">
+
+        <h2>📚 Topic Performance</h2>
+
+        {% if topic_performance %}
+
+        {% for topic in topic_performance %}
+
+        <div class="topic-progress">
+
+            <div class="topic-header">
+
+                <strong>
+                    {{ topic.topic }}
+                </strong>
+
+                <span>
+                    {{ topic.percentage }}%
+                </span>
+
+            </div>
+
+            <div class="progress-bar">
+
+                <div class="progress-fill"
+                     style="width: {{ topic.percentage }}%">
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+        {% else %}
+
+        <p>
+            Complete a test to see topic performance.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- OVERALL FEEDBACK -->
+
+    <div class="feedback-section">
+
+        <h2>💡 Overall Feedback</h2>
+
+        <p>
+            {{ feedback }}
+        </p>
+
+    </div>
+
+
+    <!-- BUTTONS -->
+
+    <div class="analysis-buttons">
+
+        <a href="/practice-test"
+           class="main-button">
+
+            Take Practice Test
+
+        </a>
+
+        <a href="/dashboard"
+           class="secondary-button">
+
+            Dashboard
+
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

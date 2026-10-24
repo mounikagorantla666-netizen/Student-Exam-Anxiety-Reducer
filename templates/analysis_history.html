@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Performance Analysis</title>
+</head>
+<body>
+    <h1>📊 Performance Analysis</h1>
+    <p>Select a completed test to view its analysis.</p>
+
+    {% if tests %}
+        {% for test in tests %}
+            <div>
+                <h3>{{ test[1] }} - {{ test[2] }}</h3>
+                <p>Score: {{ test[3] }} / {{ test[4] }}</p>
+                <a href="/analysis/{{ test[0] }}">
+                    View Detailed Analysis
+                </a>
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>No completed tests yet. Take a practice test first.</p>
+    {% endif %}
+
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>

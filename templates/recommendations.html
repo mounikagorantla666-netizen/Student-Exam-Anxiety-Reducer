@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Personalized Recommendations</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <h2>🧠 Exam Anxiety Reducer</h2>
+
+    <div>
+
+        <a href="/dashboard">Dashboard</a>
+
+        <a href="/logout">Logout</a>
+
+    </div>
+
+</nav>
+
+
+<div class="recommendation-container">
+
+    <h1>💡 Personalized Recommendations</h1>
+
+    <p>
+        Based on your recent test performance,
+        here are some suggestions for improvement.
+    </p>
+
+
+    <!-- REASON -->
+
+    <div class="recommendation-reason">
+
+        {% if reason == "Conceptual Gap" %}
+
+            <div class="big-icon">📚</div>
+
+        {% elif reason == "Time Pressure" %}
+
+            <div class="big-icon">⏱️</div>
+
+        {% else %}
+
+            <div class="big-icon">💡</div>
+
+        {% endif %}
+
+
+        <h2>{{ reason }}</h2>
+
+        {% if weak_topic %}
+
+        <p>
+            Topic requiring attention:
+            <strong>{{ weak_topic }}</strong>
+        </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- RECOMMENDATIONS -->
+
+    <div class="recommendation-box">
+
+        <h2>What You Can Do</h2>
+
+        {% for recommendation in recommendations %}
+
+        <div class="recommendation-item">
+
+            <span>✓</span>
+
+            <p>{{ recommendation }}</p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+    <!-- RELAXATION -->
+
+    <div class="relaxation-box">
+
+        <div>
+
+            <h2>🧘 Feeling stressed?</h2>
+
+            <p>
+                Take a short breathing exercise
+                before continuing your preparation.
+            </p>
+
+        </div>
+
+        <button onclick="startBreathing()">
+
+            Start Breathing Exercise
+
+        </button>
+
+    </div>
+
+
+    <!-- BREATHING EXERCISE -->
+
+    <div id="breathingBox"
+         class="breathing-box"
+         style="display:none;">
+
+        <h2>🌬️ Breathing Exercise</h2>
+
+        <div id="breathingCircle">
+            Breathe In
+        </div>
+
+        <h3 id="breathingText">
+            Get Ready...
+        </h3>
+
+        <p id="breathingTimer">
+            4 seconds
+        </p>
+
+        <button onclick="stopBreathing()">
+
+            Stop Exercise
+
+        </button>
+
+    </div>
+
+
+    <div class="analysis-buttons">
+
+        <a href="/practice-test"
+           class="main-button">
+
+            Practice Again
+
+        </a>
+
+        <a href="/dashboard"
+           class="secondary-button">
+
+            Dashboard
+
+        </a>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let breathingInterval;
+let breathingRunning = false;
+
+function startBreathing() {
+
+    document.getElementById("breathingBox")
+        .style.display = "block";
+
+    breathingRunning = true;
+
+    let phases = [
+        ["Breathe In", 4],
+        ["Hold", 4],
+        ["Breathe Out", 4]
+    ];
+
+    let phase = 0;
+    let seconds = 4;
+
+    function runPhase() {
+
+        if (!breathingRunning) {
+            return;
+        }
+
+        document.getElementById("breathingText")
+            .innerText = phases[phase][0];
+
+        seconds = phases[phase][1];
+
+        document.getElementById("breathingTimer")
+            .innerText = seconds + " seconds";
+
+        clearInterval(breathingInterval);
+
+        breathingInterval = setInterval(function() {
+
+            seconds--;
+
+            document.getElementById("breathingTimer")
+                .innerText = seconds + " seconds";
+
+            if (seconds <= 0) {
+
+                clearInterval(breathingInterval);
+
+                phase++;
+
+                if (phase >= phases.length) {
+                    phase = 0;
+                }
+
+                runPhase();
+            }
+
+        }, 1000);
+    }
+
+    runPhase();
+}
+
+
+function stopBreathing() {
+
+    breathingRunning = false;
+
+    clearInterval(breathingInterval);
+
+    document.getElementById("breathingBox")
+        .style.display = "none";
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Dashboard - Exam Anxiety Reducer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <h2>🧠 Exam Anxiety Reducer</h2>
+
+    <div>
+
+        <a href="/profile">Profile</a>
+
+        <a href="/logout">Logout</a>
+
+    </div>
+
+</nav>
+
+
+<div class="dashboard">
+
+    <h1>Welcome back, {{ name }}! 👋</h1>
+
+    <p>
+        Let's prepare for your exams with confidence.
+    </p>
+
+
+    
+<div class="dashboard-grid">
+
+    <div class="dashboard-card">
+        📝
+        <h2>Practice Test</h2>
+        <p>Take a timed practice test and evaluate your knowledge.</p>
+        <a href="/practice-test" class="main-button">Start Test →</a>
+    </div>
+
+    <div class="dashboard-card">
+        📊
+        <h2>Performance Analysis</h2>
+        <p>Understand your mistakes and test performance.</p>
+        <a href="/analysis-history" class="main-button">View Analysis →</a>
+    </div>
+
+    <div class="dashboard-card">
+        🧘
+        <h2>Anxiety & Recommendations</h2>
+        <p>Get personalized study and relaxation suggestions.</p>
+        <a href="/recommendation-history" class="main-button">Get Started →</a>
+    </div>
+
+    <div class="dashboard-card">
+        📈
+        <h2>Progress Report</h2>
+        <p>Track your test history and improvement over time.</p>
+        <a href="/progress" class="main-button">View Progress →</a>
+    </div>
+
+    <div class="dashboard-card">
+        👤
+        <h2>My Profile</h2>
+        <p>View your student information.</p>
+        <a href="/profile" class="main-button">View Profile →</a>
+    </div>
+
+</div>
+</div>
+
+</body>
+
+</html>

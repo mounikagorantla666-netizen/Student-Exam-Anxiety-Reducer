@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Test - {{ topic }}</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <h2>🧠 Exam Anxiety Reducer</h2>
+
+    <div>
+        ⏱️ Time:
+        <span id="timer">05:00</span>
+    </div>
+
+</nav>
+
+
+<div class="test-container">
+
+    <h1>{{ subject }} - {{ topic }}</h1>
+
+    <form method="POST"
+          action="/submit-test"
+          id="testForm">
+
+        <input type="hidden"
+               name="subject"
+               value="{{ subject }}">
+
+        <input type="hidden"
+               name="topic"
+               value="{{ topic }}">
+
+
+        {% for q in questions %}
+
+        <div class="question-card">
+
+            <h3>
+                Question {{ loop.index }}
+            </h3>
+
+            <p>
+                {{ q[3] }}
+            </p>
+
+            <input type="hidden"
+                   name="question_id"
+                   value="{{ q[0] }}">
+
+
+            <label>
+                <input type="radio"
+                       name="answer_{{ q[0] }}"
+                       value="A"
+                       required>
+
+                {{ q[4] }}
+            </label>
+
+
+            <label>
+                <input type="radio"
+                       name="answer_{{ q[0] }}"
+                       value="B">
+
+                {{ q[5] }}
+            </label>
+
+
+            <label>
+                <input type="radio"
+                       name="answer_{{ q[0] }}"
+                       value="C">
+
+                {{ q[6] }}
+            </label>
+
+
+            <label>
+                <input type="radio"
+                       name="answer_{{ q[0] }}"
+                       value="D">
+
+                {{ q[7] }}
+            </label>
+
+
+            <input type="hidden"
+                   name="time_{{ q[0] }}"
+                   value="0">
+
+        </div>
+
+        {% endfor %}
+
+
+        <button type="submit"
+                class="main-button">
+
+            Submit Test
+
+        </button>
+
+    </form>
+
+</div>
+
+
+<script>
+
+let totalSeconds = 300;
+
+let timer = setInterval(function() {
+
+    let minutes =
+        Math.floor(totalSeconds / 60);
+
+    let seconds =
+        totalSeconds % 60;
+
+    document.getElementById("timer")
+        .innerText =
+        String(minutes).padStart(2, "0")
+        + ":" +
+        String(seconds).padStart(2, "0");
+
+    totalSeconds--;
+
+    if (totalSeconds < 0) {
+
+        clearInterval(timer);
+
+        document.getElementById("testForm").submit();
+
+    }
+
+}, 1000);
+
+</script>
+
+</body>
+
+</html>

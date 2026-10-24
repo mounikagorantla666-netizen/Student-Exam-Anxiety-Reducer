@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Performance Analysis</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav>
+
+    <h2>🧠 Exam Anxiety Reducer</h2>
+
+    <div>
+
+        <a href="/dashboard">Dashboard</a>
+
+        <a href="/logout">Logout</a>
+
+    </div>
+
+</nav>
+
+
+<div class="analysis-container">
+
+    <h1>📊 Performance Analysis</h1>
+
+    <p>
+        {{ test[1] }} - {{ test[2] }}
+    </p>
+
+
+    <!-- SUMMARY -->
+
+    <div class="analysis-grid">
+
+        <div class="analysis-card">
+
+            <span class="analysis-icon">🎯</span>
+
+            <h3>Score</h3>
+
+            <h2>{{ test[3] }} / {{ test[4] }}</h2>
+
+        </div>
+
+
+        <div class="analysis-card">
+
+            <span class="analysis-icon">📈</span>
+
+            <h3>Percentage</h3>
+
+            <h2>{{ percentage }}%</h2>
+
+        </div>
+
+
+        <div class="analysis-card">
+
+            <span class="analysis-icon">✅</span>
+
+            <h3>Correct</h3>
+
+            <h2>{{ correct_answers }}</h2>
+
+        </div>
+
+
+        <div class="analysis-card">
+
+            <span class="analysis-icon">❌</span>
+
+            <h3>Wrong</h3>
+
+            <h2>{{ wrong_answers }}</h2>
+
+        </div>
+
+
+        <div class="analysis-card">
+
+            <span class="analysis-icon">⏱️</span>
+
+            <h3>Average Time</h3>
+
+            <h2>{{ average_time }} sec</h2>
+
+        </div>
+
+    </div>
+
+
+    <!-- AI RESULT -->
+
+    <div class="ai-analysis-box">
+
+        <h2>🤖 AI Analysis</h2>
+
+        <div class="reason-box">
+
+            <h3>Possible Reason</h3>
+
+            <h2>{{ reason }}</h2>
+
+        </div>
+
+        <p>
+            {{ message }}
+        </p>
+
+    </div>
+
+
+    <!-- WEAK TOPIC -->
+
+    <div class="topic-box">
+
+        <h2>📚 Topic Analysis</h2>
+
+        {% if weak_topic %}
+
+            <p>
+                Topic requiring more attention:
+            </p>
+
+            <h3>{{ weak_topic }}</h3>
+
+            <p>
+                Practice more questions related to
+                this topic.
+            </p>
+
+        {% else %}
+
+            <p>
+                No specific weak topic was detected.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+
+    <!-- QUESTION DETAILS -->
+
+    <div class="question-analysis">
+
+        <h2>📝 Question Analysis</h2>
+
+        <table>
+
+            <tr>
+
+                <th>Question</th>
+
+                <th>Your Answer</th>
+
+                <th>Correct Answer</th>
+
+                <th>Time</th>
+
+                <th>Result</th>
+
+            </tr>
+
+
+            {% for answer in answers %}
+
+            <tr>
+
+                <td>
+                    {{ loop.index }}
+                </td>
+
+                <td>
+                    {{ answer[1] or "Not Answered" }}
+                </td>
+
+                <td>
+                    {{ answer[4] }}
+                </td>
+
+                <td>
+                    {{ answer[2] }} sec
+                </td>
+
+                <td>
+
+                    {% if answer[3] == 1 %}
+
+                        ✅ Correct
+
+                    {% else %}
+
+                        ❌ Wrong
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+
+    <div class="analysis-buttons">
+
+    <a href="/recommendations/{{ test[0] }}"
+       class="main-button">
+
+        Get Personalized Recommendations →
+
+    </a>
+
+    <a href="/practice-test"
+       class="secondary-button">
+
+        Take Another Test
+
+    </a>
+
+    <a href="/dashboard"
+       class="secondary-button">
+
+        Dashboard
+
+    </a>
+
+</div>
+
+</div>
+
+</body>
+
+</html>

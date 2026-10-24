@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Anxiety & Recommendations</title>
+</head>
+<body>
+    <h1>🧘 Anxiety & Recommendations</h1>
+    <p>Select a completed test to get personalized suggestions.</p>
+
+    {% if tests %}
+        {% for test in tests %}
+            <div>
+                <h3>{{ test[1] }} - {{ test[2] }}</h3>
+                <p>Score: {{ test[3] }} / {{ test[4] }}</p>
+                <a href="/recommendations/{{ test[0] }}">
+                    Get Recommendations
+                </a>
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+        <p>No completed tests yet. Take a practice test first.</p>
+    {% endif %}
+
+    <a href="/dashboard">Back to Dashboard</a>
+</body>
+</html>

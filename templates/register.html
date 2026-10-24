@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Register - Exam Anxiety Reducer</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<div class="form-container">
+
+    <div class="form-box">
+
+        <h1>Create Account</h1>
+
+        <p>Start your journey towards confident exams.</p>
+
+        <form method="POST">
+
+            <label>Full Name</label>
+
+            <input type="text"
+                   name="name"
+                   placeholder="Enter your name"
+                   required>
+
+
+            <label>Email</label>
+
+            <input type="email"
+                   name="email"
+                   placeholder="Enter your email"
+                   required>
+
+
+            <label>Password</label>
+
+            <input type="password"
+                   name="password"
+                   placeholder="Create password"
+                   required>
+
+
+            <label>Course</label>
+
+            <input type="text"
+                   name="course"
+                   placeholder="Example: CSE"
+                   required>
+
+
+            <label>Year</label>
+
+            <select name="year" required>
+
+                <option value="">Select Year</option>
+
+                <option>1st Year</option>
+                <option>2nd Year</option>
+                <option>3rd Year</option>
+                <option>4th Year</option>
+
+            </select>
+
+
+            <button type="submit">
+                Register
+            </button>
+
+        </form>
+
+        <p>
+            Already have an account?
+            <a href="/login">Login</a>
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>
